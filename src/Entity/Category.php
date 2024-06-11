@@ -64,6 +64,11 @@ class Category
         return $this->description;
     }
 
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+
     public function setDescription(string $description): static
     {
         $this->description = $description;

@@ -3,6 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
+use App\Entity\Dish;
+use App\Entity\Event;
+use App\Entity\Table;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -45,7 +48,9 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         //yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'homepage');
-        yield MenuItem::linkToCrud('Category', 'fas fa-map-marker-alt', Category::class);
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::linkToCrud('Category', 'fas fa-tags', Category::class);
+        yield MenuItem::linkToCrud('Dish', 'fa-solid fa-bowl-food', Dish::class);
+        yield MenuItem::linkToCrud('Event', 'fa-solid fa-champagne-glasses', Event::class);
+        yield MenuItem::linkToCrud('Table', 'fa-solid fa-chair', Table::class);
     }
 }
