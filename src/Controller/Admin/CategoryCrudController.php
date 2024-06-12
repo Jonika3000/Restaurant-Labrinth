@@ -19,6 +19,6 @@ class CategoryCrudController extends AbstractCrudController
     {
        yield TextField::new('name');
        yield TextareaField::new('description');
-       yield AssociationField::new('parent');
+       yield AssociationField::new('parent')->setFormTypeOption('multiple', false);;
     }
 }

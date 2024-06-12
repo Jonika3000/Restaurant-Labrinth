@@ -35,6 +35,10 @@ class Event
     {
         return $this->name;
     }
+    public function __toString(): string
+    {
+        return $this->name . ' (' . $this->date->format('Y-m-d H:i:s') . ')';
+    }
 
     public function setName(string $name): static
     {

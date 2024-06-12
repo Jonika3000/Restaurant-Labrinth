@@ -5,7 +5,11 @@ namespace App\Controller\Admin;
 use App\Entity\Category;
 use App\Entity\Dish;
 use App\Entity\Event;
+use App\Entity\SiteLocale;
 use App\Entity\Table;
+use App\Entity\Translate\CategoryTranslate;
+use App\Entity\Translate\DishTranslate;
+use App\Entity\Translate\EventTranslate;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -47,5 +51,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Dish', 'fa-solid fa-bowl-food', Dish::class);
         yield MenuItem::linkToCrud('Event', 'fa-solid fa-champagne-glasses', Event::class);
         yield MenuItem::linkToCrud('Table', 'fa-solid fa-chair', Table::class);
+        yield MenuItem::linkToCrud('Locale', 'fa-solid fa-earth-americas', SiteLocale::class);
+        yield MenuItem::subMenu('Translates', 'fa-solid fa-language')->setSubItems([
+            MenuItem::linkToCrud('Category', 'fas fa-tags', CategoryTranslate::class),
+            MenuItem::linkToCrud('Dish', 'fa-solid fa-bowl-food', DishTranslate::class),
+            MenuItem::linkToCrud('Event', 'fa-solid fa-champagne-glasses', EventTranslate::class)
+        ]);
     }
 }
