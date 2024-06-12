@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Translate;
 
-use App\Repository\EventTranslateRepository;
+use App\Entity\Event;
+use App\Entity\SiteLocale;
+use App\Repository\Translate\EventTranslateRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 

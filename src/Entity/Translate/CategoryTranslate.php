@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Translate;
 
-use App\Repository\DishTranslateRepository;
+use App\Entity\Category;
+use App\Entity\SiteLocale;
+use App\Repository\Translate\CategoryTranslateRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: DishTranslateRepository::class)]
-class DishTranslate
+#[ORM\Entity(repositoryClass: CategoryTranslateRepository::class)]
+class CategoryTranslate
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -21,11 +23,11 @@ class DishTranslate
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?SiteLocale $locale = null;
+    private ?Category $category = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Dish $dish = null;
+    private ?SiteLocale $locale = null;
 
     public function getId(): ?int
     {
@@ -56,6 +58,18 @@ class DishTranslate
         return $this;
     }
 
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
     public function getLocale(): ?SiteLocale
     {
         return $this->locale;
@@ -64,18 +78,6 @@ class DishTranslate
     public function setLocale(?SiteLocale $locale): static
     {
         $this->locale = $locale;
-
-        return $this;
-    }
-
-    public function getDish(): ?Dish
-    {
-        return $this->dish;
-    }
-
-    public function setDish(?Dish $dish): static
-    {
-        $this->dish = $dish;
 
         return $this;
     }
