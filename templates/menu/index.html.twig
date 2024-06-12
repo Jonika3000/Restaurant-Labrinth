@@ -1,0 +1,28 @@
+<script src="{{ asset('js/menu-mobile.js') }}"></script>
+<div>
+    <ul class="flex items-center flex-row justify-center hidden sm:flex gap-20 mt-5">
+        {% for item in menuItems %}
+            <li><a class="text-lightBlue font-bold text-xl hover:underline" href="{{ item.uri }}">{{ item.label }}</a></li>
+        {% endfor %}
+    </ul>
+    <div class="-mr-2 flex sm:hidden justify-end ">
+        <button onclick="openMenu()" class="inline-flex items-center p-2 rounded-md focus:outline-none">
+            <i class="fa-solid fa-bars" style="color: #ffffff;"></i>
+        </button>
+    </div>
+</div>
+<div id="mobile-menu" class="z-1000 hidden opacity-0 flex justify-center items-center bg-orange duration-700 absolute top-0 left-0">
+    <button class="fixed top-50 right-8 text-white hover:text-amber-500 text-7xl font-semibold duration-300" onclick="closeMenu()">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div>
+        <div>
+            <ul class="flex flex-col items-center justify-center gap-10">
+                {% for item in menuItems %}
+                    <li><a class="text-lightBlue font-bold text-xl" href="{{ item.uri }}">{{ item.label }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+

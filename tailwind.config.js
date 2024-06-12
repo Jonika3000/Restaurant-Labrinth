@@ -29,7 +29,7 @@ module.exports = {
       'black': '#000000',
       'orange': '#ff7849',
       'green': '#388883',
-      'light-blue': '#E0F1FF',
+      'lightBlue': '#E0F1FF',
       'white': '#ffffff',
       'gray': {
         100: '#d3dce6',
@@ -41,15 +41,32 @@ module.exports = {
       'yellow': '#DAA21B'
     },
     fontFamily: {
-      sans: ['Work Sans', 'sans-serif']
+      sans: ['Work Sans', 'sans-serif'],
+      gwendolyn: ['Gwendolyn', 'cursive']
     },
     extend: {
-      spacing: {
-        '128': '32rem',
-        '144': '36rem',
+      textDecoration: ['hover', 'focus'],
+      inset: {
+        '0': '0',
+        auto: 'auto',
+        '1/2': '50%',
+        'full': '100%',
+        '10': '10px',
+        '20': '20px',
+        '40': '40px',
+        '50': '50px',
       },
-      borderRadius: {
-        '4xl': '2rem',
+      gap: {
+        '10': '10px',
+        '20': '20px',
+      },
+      spacing: {
+        '1': '8px',
+        '2': '12px',
+        '3': '16px',
+        '4': '24px',
+        '5': '32px',
+        '6': '48px',
       }
     }
   },

@@ -1,10 +1,10 @@
-{% extends 'layout/layout.html.twig' %}
+{% extends 'layout/index.html.twig' %}
 
 {% block title %}Labrinth Restaurant{% endblock %}
 
-{% block body %}
-    <p class="text-center mt-2 text-base text-text cursor-pointer">4875 Wolf Pen Road, California</p>
-    {{ knp_menu_render('main', {'template': 'menu/knp_menu.html.twig'}) }}
-    {% block main %}
-    {% endblock main %}
-{% endblock %}
+{% block main %}
+    <div class="h-80 w-full mt-6 text-center">
+        <p class="font-gwendolyn text-white text-9xl">Labrinth</p>
+        <p class="font-gwendolyn text-white text-xl">{{ 'catch.your.lunch'|trans }}</p>
+    </div>
+{% endblock main %}
