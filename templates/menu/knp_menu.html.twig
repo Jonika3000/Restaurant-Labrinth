@@ -1,0 +1,7 @@
+<ul class="{{ item.childrenAttribute('class') }}">
+    {% for item in item.children %}
+        <li class="{{ item.attribute('class') }}">
+            <a  class="text-green" href="{{ item.uri }}">{{ item.label }}1</a>
+        </li>
+    {% endfor %}
+</ul>
