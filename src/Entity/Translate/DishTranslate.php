@@ -25,7 +25,7 @@ class DishTranslate
     #[ORM\JoinColumn(nullable: false)]
     private ?SiteLocale $locale = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\OneToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Dish $dish = null;
 

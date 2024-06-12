@@ -22,7 +22,7 @@ class DishCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield TextField::new('name');
-        yield AssociationField::new('category');
+        yield AssociationField::new('category')->setFormTypeOption('multiple', false);;
         yield NumberField::new('price')->setDecimalSeparator(',');
         yield TextEditorField::new('description');
         yield ImageField::new('photo')
