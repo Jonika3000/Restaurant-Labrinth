@@ -3,11 +3,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function openMenu() {
         menu.classList.remove("hidden", "opacity-0");
-        menu.classList.add("w-full", "h-full", "opacity-100");
+        menu.classList.add(  "opacity-100");
     }
 
     function closeMenu() {
-        menu.classList.remove("w-full", "h-full", "opacity-100");
+        menu.classList.remove(  "opacity-100");
         menu.classList.add("hidden", "opacity-0");
     }
 
