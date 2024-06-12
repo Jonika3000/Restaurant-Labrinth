@@ -1,0 +1,16 @@
+{% extends 'layout/index.html.twig' %}
+
+{% block title %}Labrinth Restaurant{% endblock %}
+
+{% block main %}
+    <div class="h-4/5 w-full flex justify-center items-center flex-col">
+        <p class="font-gwendolyn text-white sm:text-9xl text-7xl">Labrinth</p>
+        <p class="font-gwendolyn text-white text-xl">{{ 'catch.your.lunch'|trans }}</p>
+    </div>
+    <div class="text-center">
+        <a href="#main"> <i class="fa-solid fa-chevron-down text-xl text-background cursor-pointer"></i></a>
+    </div>
+    <div id="main" class="bg-background">
+
+    </div>
+{% endblock main %}
