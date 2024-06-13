@@ -9,13 +9,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class MenuBuilderService
 {
-    private $container;
     private $router;
     private $translator;
 
-    public function __construct(ContainerInterface $container, UrlGeneratorInterface $router, TranslatorInterface $translator)
+    public function __construct( UrlGeneratorInterface $router, TranslatorInterface $translator)
     {
-        $this->container = $container;
         $this->router = $router;
         $this->translator = $translator;
     }
@@ -30,7 +28,7 @@ class MenuBuilderService
             [
                 'label' => 'About',
                 'uri' => $this->router->generate('app_login'),
-            ],
+            ]
         ];
 
         return $menuItems;
