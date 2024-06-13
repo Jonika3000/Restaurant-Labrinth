@@ -20,6 +20,7 @@ module.exports = {
       'orange': '#ff7849',
       'green': '#388883',
       'lightBlue': '#E0F1FF',
+      'red': '#801821',
       'white': '#ffffff',
       'gray': {
         100: '#d3dce6',
@@ -28,7 +29,7 @@ module.exports = {
         400: '#4D5360'
       },
       'text': '#F2F9FF',
-      'yellow': '#DAA21B'
+      'yellow': '#f39060'
     },
     fontFamily: {
       sans: ['Work Sans', 'sans-serif'],

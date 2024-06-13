@@ -18,6 +18,8 @@ security:
             logout:
                 path: /logout
             form_login:
+                default_target_path: app_home_page
+                always_use_default_target_path: true
                 login_path: app_login
                 check_path: app_login
                 enable_csrf: true
