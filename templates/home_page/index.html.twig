@@ -19,18 +19,14 @@
                {{ 'View'|trans }}
             </button>
         </div>
-
     </div>
-    <p class="text-white text-center text-2xl mt-7">{{ 'We.offer'|trans }}</p>
-    <div class="flex flex-row justify-around w-full flex-wrap mt-5 gap-5">
-        <div class="bg-background w-52 rounded-xl h-16 text-white flex justify-center items-center">{{ 'Parties'|trans }}</div>
-        <div class="bg-background w-52 rounded-xl h-16 text-white flex justify-center items-center">{{ 'Weddings'|trans }}</div>
-        <div class="bg-background w-52 rounded-xl h-16 text-white flex justify-center items-center">{{ 'Events'|trans }}</div>
+    <p class="text-white text-center text-4xl mt-5 font-bold">{{ 'FOLLOW.US'|trans }}</p>
+    <div class="flex items-center justify-center h-16 gap-5">
+        <i class="fa-brands fa-instagram text-2xl text-background cursor-pointer"></i>
+        <i class="fa-brands fa-facebook text-2xl text-background cursor-pointer"></i>
+        <i class="fa-brands fa-twitter text-2xl text-background cursor-pointer"></i>
     </div>
-    <div class="flex items-center justify-center">
-        <p class="text-white text-center text-1xl mt-7 mb-7 max-w-2xl">{{ 'text.home'|trans }}</p>
-    </div>
-    <div id="event" class="flex flex-wrap flex-row h-full justify-center items-start mt-8 animate-fadeIn gap-9">
+    <div id="event" class="flex flex-wrap flex-row h-full justify-center items-start mt-2 animate-fadeIn gap-9">
         <div class="w-96 h-full flex justify-start flex-col gap-5 items-start">
             <h4 class="text-5xl text-white">{{ 'Events'|trans }}</h4>
             <p class="text-white">{{ 'Menu.home.text'|trans }}</p>
@@ -40,10 +36,13 @@
         </div>
         <img class="rounded-3xl object-contain h-full w-full max-w-2xl" src="{{ asset('images/restaurantImage2.png') }}">
     </div>
-    <p class="text-white text-center text-4xl mt-5 font-bold">{{ 'FOLLOW.US'|trans }}</p>
-    <div class="flex items-center justify-center h-16 gap-5">
-        <i class="fa-brands fa-instagram text-2xl text-background cursor-pointer"></i>
-        <i class="fa-brands fa-facebook text-2xl text-background cursor-pointer"></i>
-        <i class="fa-brands fa-twitter text-2xl text-background cursor-pointer"></i>
+    <p class="text-white text-center text-2xl mt-7">{{ 'We.offer'|trans }}</p>
+    <div class="flex flex-row justify-around w-full flex-wrap mt-5 gap-5">
+        <div class="bg-background w-52 rounded-xl h-16 text-white flex justify-center items-center">{{ 'Parties'|trans }}</div>
+        <div class="bg-background w-52 rounded-xl h-16 text-white flex justify-center items-center">{{ 'Weddings'|trans }}</div>
+        <div class="bg-background w-52 rounded-xl h-16 text-white flex justify-center items-center">{{ 'Events'|trans }}</div>
+    </div>
+    <div class="flex items-center justify-center">
+        <p class="text-white text-center text-1xl mt-7 mb-7 max-w-2xl">{{ 'text.home'|trans }}</p>
     </div>
 {% endblock main %}
