@@ -21,6 +21,7 @@ class TwigEventSubscriber implements EventSubscriberInterface
     public function onControllerEvent(ControllerEvent $event): void
     {
         $this->twig->addGlobal('menuItems', $this->menuBuilder->buildMenu());
+        $this->twig->addGlobal('menuFooter', $this->menuBuilder->buildFooter());
     }
 
     public static function getSubscribedEvents(): array

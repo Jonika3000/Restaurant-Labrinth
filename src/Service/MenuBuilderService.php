@@ -33,4 +33,24 @@ class MenuBuilderService
 
         return $menuItems;
     }
+
+    public function buildFooter()
+    {
+        $menuFooter = [
+            [
+                'icon' => 'fa-brands fa-instagram text-2xl text-white cursor-pointer',
+                'uri' => 'instagram.com',
+            ],
+            [
+                'icon' => 'fa-brands fa-facebook text-2xl text-white cursor-pointer',
+                'uri' => $this->router->generate('app_login'),
+            ],
+            [
+                'icon' => 'fa-brands fa-twitter text-2xl text-white cursor-pointer',
+                'uri' => 'instagram.com',
+            ]
+        ];
+
+        return $menuFooter;
+    }
 }
