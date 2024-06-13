@@ -23,11 +23,11 @@ class MenuBuilderService
         $menuItems = [
             [
                 'label' => $this->translator->trans('Home'),
-                'uri' => $this->router->generate('app_login'),
+                'uri' => $this->router->generate('app_home_page'),
             ],
             [
-                'label' => 'About',
-                'uri' => $this->router->generate('app_login'),
+                'label' => $this->translator->trans('Events'),
+                'uri' => $this->router->generate('app_event'),
             ]
         ];
 
@@ -43,11 +43,11 @@ class MenuBuilderService
             ],
             [
                 'icon' => 'fa-brands fa-facebook text-2xl text-white cursor-pointer',
-                'uri' => $this->router->generate('app_login'),
+                'uri' => 'facebook.com'
             ],
             [
                 'icon' => 'fa-brands fa-twitter text-2xl text-white cursor-pointer',
-                'uri' => 'instagram.com',
+                'uri' => 'x.com',
             ]
         ];
 
