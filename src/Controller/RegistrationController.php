@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
@@ -30,7 +31,6 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
             $user->setPassword(
                     $userPasswordHasher->hashPassword(
                     $user,
@@ -41,18 +41,16 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
-                    ->from(new Address('wefsdfcsd@outlook.com', 'Mail Bot'))
+                    ->from(new Address($this->getParameter('email_from'), 'Mail Bot'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
 
-            // do anything else you need here, like send an email
-
-            return $this->redirectToRoute('app_login');
+            $this->authenticateUser($user);
+            return $this->redirectToRoute('app_home_page');
         }
 
         return $this->render('registration/register.html.twig', [
@@ -78,5 +76,13 @@ class RegistrationController extends AbstractController
         $this->addFlash('success', 'Your email address has been verified.');
 
         return $this->redirectToRoute('app_register');
+    }
+
+    private function authenticateUser(User $user)
+    {
+        $providerKey = 'main';
+        $token = new UsernamePasswordToken($user,  $providerKey, $user->getRoles());
+
+        $this->container->get('security.token_storage')->setToken($token);
     }
 }
