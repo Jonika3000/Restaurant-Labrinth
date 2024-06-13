@@ -15,7 +15,7 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       'background': '#202632',
-      'purple': '#7e5bef',
+      'purple': '#5b0060',
       'black': '#000000',
       'orange': '#ff7849',
       'green': '#388883',
@@ -46,6 +46,9 @@ module.exports = {
         '40': '40px',
         '50': '50px',
       },
+      spacing: {
+        '80vh': '80vh',
+      },
       animation: {
         fadeIn : 'fadeIn 1s ease-in-out',
       },
@@ -54,11 +57,7 @@ module.exports = {
           '0%': { opacity: 0.5, transform: 'translateY(-20px)' },
           '100%': { opacity: 1, transform: 'translateY(0)' },
         },
-      }),
-      gap: {
-        '10': '10px',
-        '20': '20px',
-      },
+      })
     }
   },
   plugins: [],

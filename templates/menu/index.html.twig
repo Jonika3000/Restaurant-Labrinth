@@ -1,6 +1,6 @@
 <script src="{{ asset('js/menu-mobile.js') }}"></script>
 <div>
-    <ul class="flex items-center flex-row justify-center hidden sm:flex gap-20 mt-5">
+    <ul class="flex items-center flex-row justify-center hidden sm:flex gap-5 mt-5">
         {% for item in menuItems %}
             <li><a class="text-lightBlue font-bold text-xl hover:underline" href="{{ item.uri }}">{{ item.label }}</a></li>
         {% endfor %}
@@ -17,7 +17,7 @@
     </button>
     <div>
         <div>
-            <ul class="flex flex-col items-center justify-center gap-10">
+            <ul class="flex flex-col items-center justify-center gap-2.5">
                 {% for item in menuItems %}
                     <li><a class="text-lightBlue font-bold text-xl" href="{{ item.uri }}">{{ item.label }}</a></li>
                 {% endfor %}
