@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Verify email{% endblock %}
+
+{% block body %}
+    <div class="h-screen">
+        <div class="flex justify-center items-center flex-col mt-7 gap-5">
+            {% for flash_error in app.flashes('verify_email_error') %}
+                <div class="alert alert-danger text-white" role="alert">{{ flash_error|trans }}</div>
+            {% endfor %}
+            {% for flash_success in app.flashes('success') %}
+                <div class="alert alert-danger text-white" role="alert">{{ flash_success|trans }}</div>
+            {% endfor %}
+            <a href="{{ path('app_home_page') }}" class="bg-background w-24 hover:bg-purple text-white font-bold py-2 px-4 rounded-xl text-center">
+                {{ 'Home'|trans }}
+            </a>
+        </div>
+    </div>
+{% endblock %}
