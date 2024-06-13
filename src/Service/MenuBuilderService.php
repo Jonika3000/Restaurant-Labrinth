@@ -9,13 +9,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class MenuBuilderService
 {
-    private $container;
     private $router;
     private $translator;
 
-    public function __construct(ContainerInterface $container, UrlGeneratorInterface $router, TranslatorInterface $translator)
+    public function __construct( UrlGeneratorInterface $router, TranslatorInterface $translator)
     {
-        $this->container = $container;
         $this->router = $router;
         $this->translator = $translator;
     }
@@ -30,9 +28,29 @@ class MenuBuilderService
             [
                 'label' => 'About',
                 'uri' => $this->router->generate('app_login'),
-            ],
+            ]
         ];
 
         return $menuItems;
+    }
+
+    public function buildFooter()
+    {
+        $menuFooter = [
+            [
+                'icon' => 'fa-brands fa-instagram text-2xl text-white cursor-pointer',
+                'uri' => 'instagram.com',
+            ],
+            [
+                'icon' => 'fa-brands fa-facebook text-2xl text-white cursor-pointer',
+                'uri' => $this->router->generate('app_login'),
+            ],
+            [
+                'icon' => 'fa-brands fa-twitter text-2xl text-white cursor-pointer',
+                'uri' => 'instagram.com',
+            ]
+        ];
+
+        return $menuFooter;
     }
 }
