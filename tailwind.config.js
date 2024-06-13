@@ -46,6 +46,15 @@ module.exports = {
         '40': '40px',
         '50': '50px',
       },
+      animation: {
+        fadeIn : 'fadeIn 1s ease-in-out',
+      },
+      keyframes: theme => ({
+        fadeIn: {
+          '0%': { opacity: 0.5, transform: 'translateY(-20px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
+      }),
       gap: {
         '10': '10px',
         '20': '20px',
