@@ -41,4 +41,29 @@ class EventController extends AbstractController
             'uploads_base_path' => $uploadsBasePath
         ]);
     }
+
+    #[Route('{_locale}/event/{id}', name: 'app_event_show')]
+    public function show(Event $event, Request $request, EntityManagerInterface $em): Response
+    {
+        $localeRequest = $request->getLocale();
+        $repositoryLocale = $em->getRepository(SiteLocale::class);
+        $locale = $repositoryLocale->findOneBy(['name'=>$localeRequest]);
+
+        if ($locale !== "en" && isset($locale))
+        {
+            $repositoryTranslate = $em->getRepository(EventTranslate::class);
+            $eventTranslate = $repositoryTranslate->findOneBy(['locale' => $locale, 'event'=> $event]);
+            if ($eventTranslate) {
+                $event->setName($eventTranslate->getName());
+                $event->setText($eventTranslate->getText());
+            }
+        }
+
+        $uploadsBasePath = $this->getParameter('uploads_base_path');
+
+        return $this->render('event/show.html.twig', [
+            'event' => $event,
+            'uploads_base_path' => $uploadsBasePath
+        ]);
+    }
 }
