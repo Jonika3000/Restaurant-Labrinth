@@ -26,6 +26,10 @@ class MenuBuilderService
                 'uri' => $this->router->generate('app_home_page'),
             ],
             [
+                'label' => $this->translator->trans('Menu'),
+                'uri' => $this->router->generate('app_category'),
+            ],
+            [
                 'label' => $this->translator->trans('Events'),
                 'uri' => $this->router->generate('app_event'),
             ]
