@@ -30,11 +30,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Restaurant Labrinth')
-            ->setLocales([
-                'en' => '🇬🇧 English',
-                'pl' => '🇵🇱 Polski'
-            ]);
+            ->setTitle('Restaurant Labrinth');
     }
 
     public function configureActions(): Actions
@@ -45,8 +41,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        //yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'homepage');
+        yield MenuItem::linkToDashboard('Dashboard', 'fa-solid fa-gauge');
         yield MenuItem::linkToCrud('Category', 'fas fa-tags', Category::class);
         yield MenuItem::linkToCrud('Dish', 'fa-solid fa-bowl-food', Dish::class);
         yield MenuItem::linkToCrud('Event', 'fa-solid fa-champagne-glasses', Event::class);
@@ -57,5 +52,6 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Dish', 'fa-solid fa-bowl-food', DishTranslate::class),
             MenuItem::linkToCrud('Event', 'fa-solid fa-champagne-glasses', EventTranslate::class)
         ]);
+        yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'app_homepage');
     }
 }
