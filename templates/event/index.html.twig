@@ -3,29 +3,21 @@
 {% block title %}Events{% endblock %}
 
 {% block main %}
-    <div class="relative mt-7">
+    <div class="relative mt-7 z-0">
         <img class="w-full max-h-96 object-cover rounded-3xl" src={{ asset('/images/restaurantImage3.png') }}>
         <div class="absolute inset-0 flex items-center justify-center">
-            <h1 class="text-white text-8xl font-bold">{{ "WHAT'S.GOING.ON?"|trans }}</h1>
+            <h1 class="text-white text-2xl sm:text-7xl font-bold">{{ "WHAT'S.GOING.ON?"|trans }}</h1>
         </div>
     </div>
     <h3 class="text-white text-2xl font-light text-center mt-11 mb-5">{{ "what's.happening.at.Labrinth"|trans }}</h3>
-    <div class="grid grid-cols-1 md:grid-cols-2">
-        <div class="flex flex-col gap-3 max-w-md justify-center">
-            <img class="object-cover rounded-2xl  w-full" src={{ asset('/images/restaurantImage3.png') }}>
-            <h3 class="text-white font-light">dddd</h3>
-        </div>
-        <div class="flex flex-col gap-3 max-w-md justify-center">
-            <img class="object-cover rounded-2xl  w-full" src={{ asset('/images/restaurantImage3.png') }}>
-            <h3 class="text-white font-light">dddd</h3>
-        </div>
-        <div class="flex flex-col gap-3 max-w-md justify-center">
-            <img class="object-cover rounded-2xl  w-full" src={{ asset('/images/restaurantImage3.png') }}>
-            <h3 class="text-white font-light">dddd</h3>
-        </div>
-        <div class="flex flex-col gap-3 max-w-md justify-center">
-            <img class="object-cover rounded-2xl  w-full" src={{ asset('/images/restaurantImage3.png') }}>
-            <h3 class="text-white font-light">dddd</h3>
-        </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 m-auto w-9/12 justify-center items-center" >
+        {% for event in events  %}
+            <a href="{{ path('app_event_show', {'_locale': app.request.locale, 'id': event.id}) }}">
+                <div class="flex flex-col gap-3 max-w-md justify-center">
+                    <img class="object-cover rounded-2xl w-full" src="{{ asset(uploads_base_path ~ '/' ~ event.photo) }}">
+                    <h3 class="text-white text-2xl font-light w-full break-words">{{ event.name }}</h3>
+                </div>
+            </a>
+        {% endfor %}
     </div>
 {% endblock %}
