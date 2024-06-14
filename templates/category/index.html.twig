@@ -7,22 +7,23 @@
     <h4 class="text-white text-center mt-7 font-bold text-4xl mb-7">{{ 'Our.menu'|trans }}</h4>
     {{ include('carousel/index.html.twig') }}
     <div class="mt-7 gap-3 flex flex-row justify-center items-center flex-wrap">
-        <button class="border-background border-4 text-white font-bold pl-2 text-xl pr-2">Drinks</button>
-        <button class="border-background border-4 text-white font-bold pl-2 text-xl pr-2">Food</button>
+        {%  for category in categories %}
+            <button class="border-background border-4 text-white font-bold pl-2 text-xl pr-2">{{ category.name }}</button>
+        {% endfor %}
     </div>
     <div class="mt-7">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 m-auto w-9/12 justify-center items-center">
-            <div class="bg-background h-full rounded-xl max-w-md flex flex-col gap-3 p-4">
-                <img class="object-cover rounded-2xl w-full" src="/images/food1.png">
-                <h3 class="text-white text-2xl font-normal w-full break-words">ąęąęąęąęąęąęąęąęąę</h3>
-                <h6 class="text-white text-lg font-light w-full break-words">ąęąęąęąęąęąęąęąęąęąęąęąęą ęąęąęąę
-                    ąęąęąęąęąęąęąęąęąęąęąęąęąęąęąęąę
-                </h6>
-                <div class="w-full justify-center items-center flex">
-                    <button class="w-4"><i class="fa-solid fa-cart-shopping text-white text-xl"></i></button>
+            {%  for dish in items %}
+                <div class="bg-background h-full rounded-xl max-w-md flex flex-col gap-3 p-4">
+                    <img class="object-cover rounded-2xl w-full" src="{{ asset(uploads_base_path ~ '/' ~ dish.photo) }}">
+                    <h3 class="text-white text-2xl font-normal w-full break-words">{{ dish.name }}</h3>
+                    <h6 class="text-white text-lg font-light w-full break-words">{{ dish.description|raw }}</h6>
+                    <h3 class="text-white text-xl font-normal w-full break-words">{{ dish.price }}$</h3>
+                    <div class="w-full justify-center items-center flex">
+                        <button class="w-4"><i class="fa-solid fa-cart-shopping text-white text-xl"></i></button>
+                    </div>
                 </div>
-            </div>
-
+            {% endfor %}
         </div>
     </div>
 </div>
