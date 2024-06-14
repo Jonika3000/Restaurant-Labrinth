@@ -22,11 +22,11 @@ class CategoryTranslate
     private ?string $description = null;
 
     #[ORM\OneToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Category $category = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?SiteLocale $locale = null;
 
     public function getId(): ?int

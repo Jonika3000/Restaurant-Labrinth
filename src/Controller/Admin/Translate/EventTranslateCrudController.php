@@ -3,6 +3,7 @@
 namespace App\Controller\Admin\Translate;
 
 use App\Entity\Translate\EventTranslate;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -30,5 +31,20 @@ class EventTranslateCrudController extends AbstractCrudController
         yield TextEditorField::new('text');
         yield AssociationField::new('locale')->setFormTypeOption('multiple', false);;
         yield AssociationField::new('event')->setFormTypeOption('multiple', false);;
+    }
+
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        if ($entityInstance instanceof EventTranslate) {
+            $event = $entityInstance->getEvent();
+            $existingTranslation = $entityManager->getRepository(EventTranslate::class)
+                ->findOneBy(['event' => $event]);
+
+            if ($existingTranslation) {
+                throw new \Exception('This event already has a translation.');
+            }
+        }
+
+        parent::persistEntity($entityManager, $entityInstance);
     }
 }
