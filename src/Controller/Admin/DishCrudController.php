@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Dish;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -28,8 +29,11 @@ class DishCrudController extends AbstractCrudController
         yield ImageField::new('photo')
             ->setBasePath($this->getParameter('uploads_base_path'))
             ->setUploadDir($this->getParameter('uploads_directory'))
-            ->setUploadedFileNamePattern('[randomhash].[extension]');
-        yield PercentField::new('discount')->setNumDecimals(2);
+            ->setUploadedFileNamePattern('[randomhash].[extension]')
+            ->setRequired($pageName !== Crud::PAGE_EDIT);
+        yield PercentField::new('discount')
+            ->setStoredAsFractional(false)
+            ->setNumDecimals(0);
     }
 
 

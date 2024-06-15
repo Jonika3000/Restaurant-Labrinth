@@ -62,25 +62,51 @@ class CategoryController extends AbstractController
     #[Route('{_locale}/category/show/{id}', name: 'app_category_show')]
     public function show(Category $category, DishRepository $dishRepository, CategoryRepository $categoryRepository): JsonResponse
     {
-        $dishes = $dishRepository->findBy(['category' => $category]);
-        $subCategories = $categoryRepository->findBy(['parent'=>$category]);
         $data = [];
+        $dishes = $dishRepository->findBy(['category' => $category]);
+        $data['items'] = $this->formatDishes($dishes);
+        $data['items'] = array_merge($data['items'], $this->getItemsFromChildrenCategories($category, $dishRepository));
 
-        foreach ($dishes as $dish) {
-            $data['items'][] = [
-                'name' => $dish->getName(),
-                'description' => $dish->getDescription(),
-                'price' => $dish->getPrice(),
-                'photo' => $dish->getPhoto(),
-            ];
-        }
-        foreach ($subCategories as $category) {
+        $subCategories = $categoryRepository->findBy(['parent' => $category]);
+        $data['subCategories'] = [];
+        foreach ($subCategories as $subCategory) {
             $data['subCategories'][] = [
-                'name' => $category->getName(),
-                'description' => $category->getDescription()
+                'id' => $subCategory->getId(),
+                'name' => $subCategory->getName(),
+                'description' => $subCategory->getDescription()
             ];
         }
 
         return new JsonResponse($data);
     }
+
+    private function getItemsFromChildrenCategories(Category $category, DishRepository $dishRepository): array
+    {
+        $items = [];
+
+        foreach ($category->getChildren() as $childCategory) {
+            $dishes = $dishRepository->findBy(['category' => $childCategory]);
+            $items = array_merge($items, $this->formatDishes($dishes));
+        }
+
+        return $items;
+    }
+
+    private function formatDishes(array $dishes): array
+    {
+        $formattedDishes = [];
+
+        foreach ($dishes as $dish) {
+            $formattedDishes[] = [
+                'name' => $dish->getName(),
+                'description' => $dish->getDescription(),
+                'price' => $dish->getPrice(),
+                'discount' => $dish->getDiscount(),
+                'photo' => $dish->getPhoto(),
+            ];
+        }
+
+        return $formattedDishes;
+    }
+
 }

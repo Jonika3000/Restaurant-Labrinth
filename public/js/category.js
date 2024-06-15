@@ -17,7 +17,6 @@ function categoryChange(categoryId, locale) {
         })
         .then(data => {
             if (Array.isArray(data.items)) {
-                loadingCircle.classList.add('hidden');
                 data.items.forEach(item => {
                     const dishDiv = createDivItem(item);
                     container.appendChild(dishDiv);
@@ -25,12 +24,12 @@ function categoryChange(categoryId, locale) {
             }
 
             if(Array.isArray(data.subCategories)){
-                loadingCircle.classList.add('hidden');
                 data.subCategories.forEach(category => {
-                    const textCategory = createTextCategory(category);
+                    const textCategory = createTextCategory(category, locale);
                     containerSubCategories.appendChild(textCategory);
                 });
             }
+            loadingCircle.classList.add('hidden');
         })
         .catch(error => {
             console.error('Fetch error:', error);
@@ -57,10 +56,20 @@ function createDivItem (item) {
     description.innerHTML = item.description;
     dishDiv.appendChild(description);
 
-    const price = document.createElement('h3');
-    price.classList.add('text-white', 'text-xl', 'font-normal', 'w-full', 'break-words');
-    price.innerText = item.price + ' $';
-    dishDiv.appendChild(price);
+    if(item.discount > 0)
+    {
+        const discount = document.createElement('h3');
+        discount.classList.add('text-lightRed', 'text-xl', 'font-normal');
+        discount.innerText = calculateDiscount(item.price, item.discount) + ' $';
+        dishDiv.appendChild(discount);
+    }
+    else
+    {
+        const price = document.createElement('h3');
+        price.classList.add('text-white', 'text-xl', 'font-normal', 'w-full');
+        price.innerText = item.price + ' $';
+        dishDiv.appendChild(price);
+    }
 
     const cartButtonDiv = document.createElement('div');
     cartButtonDiv.classList.add('w-full', 'justify-center', 'items-end', 'flex', 'h-full');
@@ -75,7 +84,7 @@ function createDivItem (item) {
     return dishDiv;
 }
 
-function createTextCategory (category) {
+function createTextCategory (category, locale) {
     const textCategory = document.createElement('h3');
     textCategory.classList.add('text-white', 'font-bold', 'text-xl', 'hover:underline', 'cursor-pointer');
     textCategory.addEventListener('click', function() {
@@ -84,4 +93,9 @@ function createTextCategory (category) {
     textCategory.innerHTML = category.name;
 
     return textCategory;
+}
+
+function calculateDiscount(originalPrice, discountPercent) {
+    let discountAmount = (originalPrice * discountPercent) / 100;
+    return originalPrice - discountAmount;
 }
