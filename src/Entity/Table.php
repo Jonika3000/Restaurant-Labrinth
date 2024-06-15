@@ -36,6 +36,11 @@ class Table
         $this->tableReserveds = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return (string)$this->number;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
