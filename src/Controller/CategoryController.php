@@ -3,28 +3,29 @@
 namespace App\Controller;
 
 use App\Entity\Category;
-use App\Entity\Dish;
 use App\Entity\SiteLocale;
 use App\Entity\Translate\CategoryTranslate;
 use App\Entity\Translate\DishTranslate;
+use App\Repository\CategoryRepository;
+use App\Repository\DishRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class CategoryController extends AbstractController
 {
-    #[Route('{_locale}/categories', name: 'app_category')]
-    public function index(EntityManagerInterface $entityManager, Request $request): Response
+    #[Route('{_locale}/category', name: 'app_category')]
+    public function index(EntityManagerInterface $entityManager, Request $request, CategoryRepository $categoryRepository,
+                          DishRepository $dishRepository): Response
     {
         $localeRequest = $request->getLocale();
         $repositoryLocale = $entityManager->getRepository(SiteLocale::class);
         $locale = $repositoryLocale->findOneBy(['name'=>$localeRequest]);
-        $categoriesRepo = $entityManager->getRepository(Category::class);
-        $categories = $categoriesRepo->findBy(['parent'=>null]);
-        $repositoryDish = $entityManager->getRepository(Dish::class);
-        $dishes = $repositoryDish->findAll();
+        $categories = $categoryRepository->findBy(['parent'=>null]);
+        $dishes = $dishRepository->findAll();
 
         if ($locale !== "en" && isset($locale))
         {
@@ -56,5 +57,30 @@ class CategoryController extends AbstractController
             'items' => $dishes,
             'uploads_base_path' => $uploadsBasePath
         ]);
+    }
+
+    #[Route('{_locale}/category/show/{id}', name: 'app_category_show')]
+    public function show(Category $category, DishRepository $dishRepository, CategoryRepository $categoryRepository): JsonResponse
+    {
+        $dishes = $dishRepository->findBy(['category' => $category]);
+        $subCategories = $categoryRepository->findBy(['parent'=>$category]);
+        $data = [];
+
+        foreach ($dishes as $dish) {
+            $data['items'][] = [
+                'name' => $dish->getName(),
+                'description' => $dish->getDescription(),
+                'price' => $dish->getPrice(),
+                'photo' => $dish->getPhoto(),
+            ];
+        }
+        foreach ($subCategories as $category) {
+            $data['subCategories'][] = [
+                'name' => $category->getName(),
+                'description' => $category->getDescription()
+            ];
+        }
+
+        return new JsonResponse($data);
     }
 }
