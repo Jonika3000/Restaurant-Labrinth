@@ -24,7 +24,7 @@ class TableReserved
     private ?string $phoneNumber = null;
 
     #[ORM\ManyToOne(inversedBy: 'tableReserveds')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Table $tableToReserve = null;
 
     public function getId(): ?int

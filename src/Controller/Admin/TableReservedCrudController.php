@@ -25,6 +25,6 @@ class TableReservedCrudController extends AbstractCrudController
         yield TextField::new('phoneNumber');
         yield DateTimeField::new('date');
         yield NumberField::new('numberofPeople');
-        yield AssociationField::new('tableToReserve')->setFormTypeOption('multiple', false);
+        yield AssociationField::new('tableToReserve')->setFormTypeOption('multiple', false)->setRequired(false);
     }
 }
