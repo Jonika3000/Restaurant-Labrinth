@@ -1,15 +1,44 @@
 {% extends 'layout/index.html.twig' %}
 
 {% block title %}Cart{% endblock %}
- <div class="flex flex-wrap flex-row">
-   <div id="items">
 
-   </div>
-  <div>
-
-  </div>
- </div>
 {% block main %}
+    <div class="flex flex-wrap mt-7 justify-between">
+        <div id="items" class="w-full h-full flex flex-col md:mt-0 sm:max-w-md xl:p-0 gap-7"></div>
+        <div class="w-full bg-background rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
+            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                {{ form_start(form, {'attr': {'class': 'space-y-4 md:space-y-6'}}) }}
 
- <script src="{{ asset('js/cartPage.js') }}"></script>
+                <div>
+                    {{ form_label(form.comment, 'Comment'|trans, {'label_attr': {'class': 'block mb-2 text-sm font-medium text-white'}}) }}
+                    {{ form_widget(form.comment, {'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-yellow focus:border-yellow block w-full p-2.5', 'placeholder': 'Enter your comment (optional)'}}) }}
+                </div>
+
+                <div>
+                    {{ form_label(form.date, 'Date'|trans, {'label_attr': {'class': 'block mb-2 text-sm font-medium text-white'}}) }}
+                    {{ form_widget(form.date, {'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-yellow focus:border-yellow block w-full p-2.5'}}) }}
+                </div>
+
+                <div>
+                    {{ form_label(form.address, 'Delivery Address'|trans, {'label_attr': {'class': 'block mb-2 text-sm font-medium text-white'}}) }}
+                    {{ form_widget(form.address, {'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-yellow focus:border-yellow block w-full p-2.5', 'placeholder': 'Enter delivery address'}}) }}
+                </div>
+
+                <div>
+                    {{ form_label(form.phone, 'Phone Number'|trans, {'label_attr': {'class': 'block mb-2 text-sm font-medium text-white'}}) }}
+                    {{ form_widget(form.phone, {'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-yellow focus:border-yellow block w-full p-2.5', 'placeholder': 'Enter your phone number'}}) }}
+                </div>
+
+                <div>
+                    {{ form_label(form.name, 'Full Name'|trans, {'label_attr': {'class': 'block mb-2 text-sm font-medium text-white'}}) }}
+                    {{ form_widget(form.name, {'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-yellow focus:border-yellow block w-full p-2.5', 'placeholder': 'Enter your full name'}}) }}
+                </div>
+
+                <button type="submit" class="w-full text-white bg-purple hover:bg-yellow focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">{{ 'Buy'|trans }}</button>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    <script src="{{ asset('js/cartPage.js') }}"></script>
 {% endblock %}

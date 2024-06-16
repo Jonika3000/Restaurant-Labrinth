@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Order;
+use App\Form\OrderFormType;
 use App\Repository\DishRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,10 +15,23 @@ use Symfony\Component\Routing\Attribute\Route;
 class CartController extends AbstractController
 {
     #[Route('/cart', name: 'app_cart')]
-    public function index(): Response
+    public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $order = new Order();
+        $form = $this->createForm(OrderFormType::class, $order);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($order);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Order successfully made! Our manager will call you back soon.');
+            // Redirect to a success route or page
+            return $this->redirectToRoute('app_home'); // Adjust to your route
+        }
+
         return $this->render('cart/index.html.twig', [
-            'controller_name' => 'CartController',
+            'form' => $form->createView(),
         ]);
     }
 
