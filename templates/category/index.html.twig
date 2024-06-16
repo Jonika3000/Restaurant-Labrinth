@@ -32,12 +32,16 @@
                             <h3 class="text-white text-xl font-normal w-full break-words">{{ dish.price }}$</h3>
                         {% endif %}
                         <div class="w-full justify-center items-end flex h-full">
-                            <button class="w-4"><i class="fa-solid fa-cart-shopping text-white text-xl"></i></button>
+                            <button class="w-4" onclick="addToCart({{ dish.id }})"><i class="fa-solid fa-cart-shopping text-white text-xl"></i></button>
                         </div>
                     </div>
                 {% endfor %}
             </div>
         </div>
+        <div id='alert' class="p-4 mb-4 text-sm text-white rounded-lg bg-background hidden fixed bottom-0" role="alert">
+            <h4 class="text-white">{{ 'Successfully.added.to.cart'|trans }}</h4>
+        </div>
     </div>
     <script src="{{ asset('js/category.js') }}" defer></script>
+    <script src="{{ asset('js/cart.js') }}"></script>
 {% endblock %}

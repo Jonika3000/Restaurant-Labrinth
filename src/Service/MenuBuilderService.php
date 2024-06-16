@@ -36,6 +36,10 @@ class MenuBuilderService
             [
                 'label' => $this->translator->trans('Reservation'),
                 'uri' => $this->router->generate('app_reservation'),
+            ],
+            [
+                'label' => $this->translator->trans('Cart'),
+                'uri' => $this->router->generate('app_cart'),
             ]
         ];
 
