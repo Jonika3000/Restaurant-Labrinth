@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Order;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,8 +14,12 @@ class OrderFormType extends AbstractType
     {
         $builder
             ->add('comment')
-            ->add('date', null, [
-                'widget' => 'single_text'
+            ->add('date', DateType::class, [
+                'widget' => 'single_text',
+                'html5' => true,
+                'attr' => [
+                    'min' => (new \DateTime())->format('Y-m-d')
+                ]
             ])
             ->add('address')
             ->add('phone')

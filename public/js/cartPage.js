@@ -1,4 +1,3 @@
-document.addEventListener("DOMContentLoaded", function() {
     const itemsLocalStorage = localStorage.getItem('cart');
     const cartItems = itemsLocalStorage ? JSON.parse(itemsLocalStorage) : [];
 
@@ -23,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             data.forEach(item => {
                 const newItemDiv = document.createElement('div');
-                newItemDiv.classList.add('bg-background', 'h-full', 'rounded-xl', 'flex', 'flex-row', 'gap-3', 'p-4');
+                newItemDiv.classList.add('bg-background', 'h-full', 'rounded-xl', 'flex', 'md:flex-row', 'gap-3', 'p-4', 'flex-col');
 
                 const imgElement = document.createElement('img');
                 imgElement.classList.add('object-cover', 'rounded-2xl', 'w-full', 'max-h-52', 'max-w-36');
@@ -59,4 +58,12 @@ document.addEventListener("DOMContentLoaded", function() {
         .catch(error => {
             console.error('There has been a problem with your fetch operation:', error);
         });
-});
+
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(event) {
+
+        const cartInput = document.getElementById('cart-input');
+        cartInput.value = JSON.stringify(cartItems);
+
+        localStorage.removeItem('cart');
+    });
