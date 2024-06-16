@@ -1,0 +1,24 @@
+{% block field %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Photo</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for orderItem in field.value %}
+            <tr>
+                <td>{{ orderItem.item.name }}</td>
+                <td>{{ orderItem.item.price }}</td>
+                <td>{{ orderItem.quantity }}</td>
+                <td><img src="/uploads/images/{{ orderItem.item.photo }}" alt="{{ orderItem.item.name }}" class="img-thumbnail" style="max-width: 100px;"></td>
+                <td>{{ orderItem.item.description }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

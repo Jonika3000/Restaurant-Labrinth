@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Category;
 use App\Entity\Dish;
 use App\Entity\Event;
+use App\Entity\Order;
 use App\Entity\SiteLocale;
 use App\Entity\Table;
 use App\Entity\TableReserved;
@@ -48,6 +49,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Event', 'fa-solid fa-champagne-glasses', Event::class);
         yield MenuItem::linkToCrud('Table', 'fa-solid fa-chair', Table::class);
         yield MenuItem::linkToCrud('Reserved Tables', 'fa-solid fa-utensils', TableReserved::class);
+        yield MenuItem::linkToCrud('Orders', 'fa-solid fa-truck', Order::class);
         yield MenuItem::linkToCrud('Locale', 'fa-solid fa-earth-americas', SiteLocale::class);
         yield MenuItem::subMenu('Translates', 'fa-solid fa-language')->setSubItems([
             MenuItem::linkToCrud('Category', 'fas fa-tags', CategoryTranslate::class),
