@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <link rel="icon" href="{{ asset('images/Plankton.svg') }}">
         {% block stylesheets %}
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
             <link href="https://fonts.googleapis.com/css2?family=Gwendolyn:wght@400;700&display=swap" rel="stylesheet">
@@ -27,5 +27,14 @@
             {% endfor %}
         </ul>
         <p class="text-white text-center mt-2">All rights reserved <i class="fa-regular fa-copyright text-white"></i></p>
+        <ul class="flex flex-row items-center justify-center gap-2.5">
+            {% for locale in ['en', 'pl'] %}
+                <li>
+                    <a href="{{ path('app_home_page', {'_locale': locale}) }}" class="text-white">
+                        {{ locale }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
     </body>
 </html>

@@ -7,7 +7,7 @@ parameters:
     uploads_full_path: '%kernel.project_dir%/public/uploads/images'
     uploads_directory: '/public/uploads/images'
     uploads_base_path: '/uploads/images'
-    email_from: 'wefsdfcsd@outlook.com'
+    email_from: 'daszxcsfdsdfsdf@outlook.com'
     admin_email: 'katyadyduch@gmail.com'
 
 services:
