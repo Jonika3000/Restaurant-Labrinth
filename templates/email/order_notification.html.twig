@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Order Notification</title>
+</head>
+<body>
+<h2>New Order Notification</h2>
+<p>Hello Admin,</p>
+<p>A new order has been placed with the following details:</p>
+
+<table>
+    <thead>
+    <tr>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for orderItem in order.orderItems %}
+        <tr>
+            <td>{{ orderItem.item.name }}</td>
+            <td>{{ orderItem.quantity }}</td>
+            <td>{{ orderItem.item.price }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<p>Customer Details:</p>
+<ul>
+    <li><strong>Name:</strong> {{ order.name }}</li>
+    <li><strong>Phone:</strong> {{ order.phone }}</li>
+    <li><strong>Address:</strong> {{ order.address }}</li>
+    <li><strong>Comment:</strong> {{ order.comment }}</li>
+</ul>
+
+<p>Thank you.</p>
+</body>
+</html>
