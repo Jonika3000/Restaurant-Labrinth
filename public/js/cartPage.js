@@ -5,7 +5,7 @@ var loadingCircle = document.getElementById('loadingCircle');
 var formDiv = document.getElementById('formDiv');
 var emptyText = document.getElementById('empty');
 
-fetch('/cart/getItems', {
+fetch('/' + locale + '/cart/getItems', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'

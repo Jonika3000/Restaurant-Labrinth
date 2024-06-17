@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Order;
 use App\Entity\OrderItem;
+use App\Entity\Translate\DishTranslate;
 use App\Entity\User;
 use App\Form\OrderFormType;
 use App\Repository\DishRepository;
+use App\Repository\SiteLocaleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\NotificationEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,7 +36,7 @@ class CartController extends AbstractController
         $this->dishRepository = $dishRepository;
     }
 
-    #[Route('/cart', name: 'app_cart')]
+    #[Route('{_locale}/cart', name: 'app_cart')]
     public function index(Request $request): Response
     {
         $order = new Order();
@@ -82,21 +84,31 @@ class CartController extends AbstractController
         return $this->render('reservation/success.html.twig');
     }
 
-    #[Route('/cart/getItems', name: 'cart_items')]
-    public function items(Request $request): JsonResponse
+    #[Route('{_locale}/cart/getItems', name: 'cart_items')]
+    public function items(Request $request, SiteLocaleRepository $siteLocaleRepository): JsonResponse
     {
         $content = $request->getContent();
         $data = json_decode($content, true);
-
+        $localeRequest = $request->getLocale();
+        $locale = $siteLocaleRepository->findOneBy(['name'=>$localeRequest]);
         if (!isset($data['cart']) || !is_array($data['cart'])) {
             return new JsonResponse(['error' => 'Invalid cart data'], 400);
         }
 
         $formattedDishes = [];
+        $repositoryDishTranslate = $this->entityManager->getRepository(DishTranslate::class);
 
         foreach ($data['cart'] as $item) {
             $dish = $this->dishRepository->find($item['id']);
             if ($dish) {
+                if ($localeRequest !== "en" && isset($locale)) {
+                    $dishTranslate = $repositoryDishTranslate->findOneBy(['locale' => $locale, 'dish' => $dish]);
+                    if ($dishTranslate) {
+                        $dish->setName($dishTranslate->getName());
+                        $dish->setDescription($dishTranslate->getDescription());
+                    }
+                }
+
                 $formattedDishes[] = [
                     'id' => $dish->getId(),
                     'name' => $dish->getName(),
