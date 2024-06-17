@@ -1,0 +1,49 @@
+{% extends 'layout/index.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block main %}
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        <div class="bg-background shadow overflow-hidden sm:rounded-lg">
+            <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg font-medium leading-6 text-white">{{ 'User.Profile'|trans }}</h3>
+            </div>
+            <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+                <dl class="sm:divide-y sm:divide-gray-200">
+                    <div class="flex justify-between px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-white">{{ 'Name'|trans }}</dt>
+                        <dd class="mt-1 text-sm text-white sm:col-span-2">{{ app.user.login }}</dd>
+                    </div>
+                    <div class="flex justify-between px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-white">{{ 'Email.address'|trans }}</dt>
+                        <dd class="mt-1 text-sm text-white sm:col-span-2">{{ app.user.email }}</dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+
+        <div class="mt-8">
+            <h3 class="text-lg font-medium leading-6 text-white">{{ "Orders"|trans }}</h3>
+            <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {% for order in app.user.orders %}
+                    <div class="bg-background overflow-hidden shadow rounded-lg">
+                        <div class="px-4 py-5 sm:p-6">
+                            <h3 class="text-lg font-medium leading-6 text-white">{{ order.name }}</h3>
+                            <p class="mt-2 text-sm text-white">{{ order.date|date('Y-m-d') }}</p>
+                        </div>
+                        <div class="border-t border-gray-200 px-4 py-4 sm:px-6">
+                            <div class="text-sm text-white">
+                                {{ "Order.Number"|trans }}: {{ order.id }}
+                            </div> 
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="mt-8 mb-8">
+            <button class="bg-background hover:bg-purple text-white font-bold py-2 px-4 rounded-xl">
+                <a href="/logout" class="text-sm font-medium text-white hover:text-gray-400">{{ "Logout"|trans }}</a>
+            </button>
+        </div>
+    </div>
+{% endblock %}
