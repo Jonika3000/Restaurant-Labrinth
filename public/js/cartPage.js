@@ -1,6 +1,9 @@
 var itemsLocalStorage = localStorage.getItem('cart');
 var cartItems = itemsLocalStorage ? JSON.parse(itemsLocalStorage) : [];
 var body = JSON.stringify({ cart: cartItems });
+var loadingCircle = document.getElementById('loadingCircle');
+var formDiv = document.getElementById('formDiv');
+var emptyText = document.getElementById('empty');
 
 fetch('/cart/getItems', {
     method: 'POST',
@@ -16,6 +19,11 @@ fetch('/cart/getItems', {
         return response.json();
     })
     .then(data => {
+        loadingCircle.classList.add('hidden');
+        if(data.length>0)
+            formDiv.classList.remove('hidden');
+        else
+            emptyText.classList.remove('hidden');
         const itemsContainer = document.getElementById('items');
         itemsContainer.innerHTML = '';
 
@@ -28,7 +36,7 @@ fetch('/cart/getItems', {
             imgElement.src = '/uploads/images/' + item.photo;
 
             const textElement = document.createElement('h3');
-            textElement.classList.add('text-white', 'text-2xl', 'font-normal', 'w-full', 'break-words');
+            textElement.classList.add('text-white', 'text-2xl', 'font-normal', 'w-full', 'break-words', 'max-w-36');
             textElement.textContent = item.name;
 
             const quantityInput = document.createElement('input');
@@ -53,9 +61,7 @@ fetch('/cart/getItems', {
 
             itemsContainer.appendChild(newItemDiv);
         });
-        delete itemsLocalStorage;
-        delete cartItems;
-        delete body;
+
     })
     .catch(error => {
         console.error('There has been a problem with your fetch operation:', error);
@@ -69,3 +75,9 @@ form.addEventListener('submit', function(event) {
     delete form;
     localStorage.removeItem('cart');
 });
+delete loadingCircle;
+delete formDiv;
+delete itemsLocalStorage;
+delete cartItems;
+delete body;
+delete emptyText;
