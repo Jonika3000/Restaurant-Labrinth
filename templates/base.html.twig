@@ -26,5 +26,14 @@
             {% endfor %}
         </ul>
         <p class="text-white text-center mt-2">All rights reserved <i class="fa-regular fa-copyright text-white"></i></p>
+        <ul class="flex flex-row items-center justify-center gap-2.5">
+            {% for locale in ['en', 'pl'] %}
+                <li>
+                    <a href="{{ path('app_home_page', {'_locale': locale}) }}" class="text-white">
+                        {{ locale }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
     </body>
 </html>
