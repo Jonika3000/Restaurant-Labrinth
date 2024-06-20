@@ -52,3 +52,6 @@ symfony server:start
 ![image](https://github.com/Jonika3000/Restaurant-Labrinth/assets/66825034/c03f2854-c529-408e-9586-de6b35a44c6b)
 ![image](https://github.com/Jonika3000/Restaurant-Labrinth/assets/66825034/55898887-f85e-4c02-bcb3-dce6bc5e3a39)
 ![image](https://github.com/Jonika3000/Restaurant-Labrinth/assets/66825034/5f2dee93-6e86-47e9-a10f-5661b4e1c3d4)
+![image](https://github.com/Jonika3000/Restaurant-Labrinth/assets/66825034/b349f57b-6d37-435e-8e69-ae041afc960e)
+![image](https://github.com/Jonika3000/Restaurant-Labrinth/assets/66825034/93507cb0-c1b5-4219-8fcd-06528aec89b8)
+![image](https://github.com/Jonika3000/Restaurant-Labrinth/assets/66825034/41bb52ef-4e47-4f78-91d9-c9eb84fa562a)
