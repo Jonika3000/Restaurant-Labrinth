@@ -34,7 +34,7 @@ class Dish
     /**
      * @var Collection<int, OrderItem>
      */
-    #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'item')]
+    #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'item', cascade: ['remove'])]
     private Collection $orderItems;
 
     #[ORM\Column(nullable: true)]
